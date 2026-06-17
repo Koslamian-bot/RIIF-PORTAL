@@ -1,0 +1,17 @@
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const client = window.supabase.createClient(
+  //paste the contents here from the .env file
+);
+
+window.login = async function () {
+  await client.auth.signInWithOAuth({
+    provider: "google"
+  });
+};
+</script>
+
+<button onclick="login()">
+  Login With Google
+</button>
