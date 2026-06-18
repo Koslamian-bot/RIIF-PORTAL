@@ -49,4 +49,28 @@ public class ProjectController {
         projectService.deleteProject(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PatchMapping("/{id}/approve")
+    public ResponseEntity<Project> approve(@PathVariable UUID id, @RequestBody ReviewDTO dto){
+        return ResponseEntity.ok(
+                projectService.approveProject(id,dto.getReviewNotes())
+        );
+    }
+
+    @PatchMapping("/{id}/reject")
+    public ResponseEntity<Project> reject(@PathVariable UUID id , @RequestBody ReviewDTO dto){
+        return ResponseEntity.ok(
+                projectService.rejectProject(id,dto.getReviewNotes())
+        );
+    }
+
+    @PatchMapping("/{id}/meeting")
+    public ResponseEntity<Project> scheduleMeeting(
+            @PathVariable UUID id,
+            @RequestBody ReviewDTO dto
+    ) {
+        return ResponseEntity.ok(
+                projectService.scheduleMeeting(id, dto.getMeetingTime())
+        );
+    }
 }
